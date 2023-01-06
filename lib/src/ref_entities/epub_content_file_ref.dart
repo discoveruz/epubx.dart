@@ -17,9 +17,7 @@ abstract class EpubContentFileRef {
 
   EpubContentType? ContentType;
   String? ContentMimeType;
-  EpubContentFileRef(EpubBookRef epubBookRef) {
-    this.epubBookRef = epubBookRef;
-  }
+  EpubContentFileRef(this.epubBookRef);
 
   @override
   int get hashCode =>
@@ -46,7 +44,7 @@ abstract class EpubContentFileRef {
     return contentFileEntry;
   }
 
-  List<int> getContentStream() {
+  Uint8List getContentStream() {
     return openContentStream(getContentFileEntry());
   }
 
