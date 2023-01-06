@@ -14,7 +14,7 @@ dependencies:
     path: ../../
   # To get the epub from the internet
   http:  ^0.13.4
-  image: ^3.0.8
+  image: ^4.0.7
 
 dev_dependencies:
   flutter_test:

@@ -10,9 +10,9 @@ environment:
 dependencies:
   archive: ^3.3.5
   quiver: ^3.2.1
-  xml: ^6.2.2
+  xml: ^6.0.1
   image: ^4.0.7
-  collection: ^1.17.0
+  collection: ^1.15.0
 
 dev_dependencies:
   test: ^1.22.1
