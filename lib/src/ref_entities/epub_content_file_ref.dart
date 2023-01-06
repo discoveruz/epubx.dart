@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
 import 'dart:convert' as convert;
@@ -26,10 +27,6 @@ abstract class EpubContentFileRef {
 
   @override
   bool operator ==(other) {
-    if (!(other is EpubContentFileRef)) {
-      return false;
-    }
-
     return (other is EpubContentFileRef &&
         other.FileName == FileName &&
         other.ContentMimeType == ContentMimeType &&
@@ -53,17 +50,15 @@ abstract class EpubContentFileRef {
     return openContentStream(getContentFileEntry());
   }
 
-  List<int> openContentStream(ArchiveFile contentFileEntry) {
-    var contentStream = <int>[];
-    if (contentFileEntry.content == null) {
+  Uint8List openContentStream(ArchiveFile contentFileEntry) {
+    if (contentFileEntry.rawContent == null) {
       throw Exception(
           'Incorrect EPUB file: content file \"$FileName\" specified in manifest is not found.');
     }
-    contentStream.addAll(contentFileEntry.content);
-    return contentStream;
+    return contentFileEntry.rawContent!.toUint8List();
   }
 
-  Future<List<int>> readContentAsBytes() async {
+  Future<Uint8List> readContentAsBytes() async {
     var contentFileEntry = getContentFileEntry();
     var content = openContentStream(contentFileEntry);
     return content;
